@@ -2,15 +2,11 @@ import { defineStore } from "pinia";
 import axios from "axios";
 
 export const useAuthStore = defineStore("auth", {
-	state: () => ({
-		user: null,
-    token: null,
-    error: null,
-  }),
   actions: {
-		async login(data: { userName: string; password: string }) {
-			const token = useCookie('testToken')
-			const toast = useToast()
+    async login(data: { userName: string; password: string }) {
+      const router = useRouter()
+      const token = useCookie('testToken')
+      const toast = useToast()
       try {
         // Backend API'ga POST so'rov yuborish
         const res = await axios.post(
@@ -18,11 +14,10 @@ export const useAuthStore = defineStore("auth", {
           data
         );
 
-				console.log(res.data.accessToken);
 				token.value = res.data.accessToken
+        router.push('/')
       } catch (error: any) {
-        console.log(error.response.data.message);
-				toast.add({title: error.response.data.message})
+				toast.add({title: "Login yoki parol xato"})
       }
     },
 		async checkUser() {
@@ -37,13 +32,8 @@ export const useAuthStore = defineStore("auth", {
 						}
 					}
         );
-
-				if (res.status == 401) {
-					useRouter().push('/auth');
-				}
-
       } catch (error: any) {
-        console.log(error);
+        throw error
       }
     },
   },

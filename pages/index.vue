@@ -7,37 +7,24 @@ definePageMeta({
     "admin",
   ],
 });
-import { reactive, onMounted } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import axios from "axios";
 import { io } from "socket.io-client";
-const toast = useToast();
+
+// strore 
+import { usePostStore } from "#build/imports";
+const postStore = usePostStore()
 
 const state = reactive([]);
 const post = reactive({ title: "", body: "" });
-const one = reactive([]);
+const limit = ref(10);
 
 // Socket connection
 const socket = io("ws://localhost:8080"); // backent url
 
-const getAll = async () => {
-  try {
-    const res = await axios.get("http://localhost:8080/api/post/get-all");
-    state.splice(0, state.length, ...res.data);
-  } catch (e) {
-    console.log(e);
-  }
-};
 const addPost = async () => {
   if (post.title && post.body) {
-    try {
-      const res = await axios.post("http://localhost:8080/api/post/create", {
-        ...post,
-      });
-      console.log(res.data);
-      if (res.status == 200) toast.add({ title: "Muvaffaqiyatli qo'shildi" });
-    } catch (e) {
-      console.log(e);
-    }
+    postStore.addPost({title: post.title, body: post.body})
   } else {
     toast.add({ title: "Barcha maydonni to'ldiring" });
   }
@@ -89,11 +76,11 @@ const columns = [
   },
 ];
 
+socket.on("newPost", (data) => {
+  postStore.posts.unshift(data);
+});
 onMounted(() => {
-  getAll();
-  socket.on("salom", (data) => {
-    state.push(data);
-  });
+  postStore.getAllPost();
 });
 </script>
 
@@ -111,8 +98,8 @@ onMounted(() => {
     </div>
   </div>
   <div>
-    <div v-if="Array.isArray(state) && state.length > 0">
-      <UTable :rows="state" :columns="columns">
+    <div v-if="Array.isArray(postStore.posts) && postStore.posts.length > 0">
+      <UTable :rows="postStore.posts" :columns="columns">
         <template #actions-data="{ row }">
           <UDropdown :items="items(row)">
             <UButton
@@ -126,6 +113,9 @@ onMounted(() => {
     </div>
     <div v-else>
       <div>Ma'lumotlar yo'q</div>
+    </div>
+    <div class="flex justify-center">
+      <UButton @click="postStore.getAllPost()">Yana</UButton>
     </div>
   </div>
 </template>

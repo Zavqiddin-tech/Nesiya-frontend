@@ -1,9 +1,10 @@
-import { ref, reactive } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
-import { io } from "socket.io-client";
+
+import { useUrlStore } from "../url";
 
 export const usePostStore = defineStore("post", {
+
 
 	state: ()=> ({
 		posts: [] as any[],
@@ -14,12 +15,13 @@ export const usePostStore = defineStore("post", {
   actions: {
     
     async getAllPost() {
+      const url = useUrlStore().url
       const token = useCookie("testToken");
       const toast = useToast();
 
       try {
         // Backend API'ga GET so'rov yuborish
-        const res = await axios.get("http://localhost:8080/api/post/get-all", {
+        const res = await axios.get(`${url}/post/get-all`, {
           params: { limit: this.limit },
           headers: { Authorization: `Bearer ${token.value}` },
         });
@@ -31,11 +33,12 @@ export const usePostStore = defineStore("post", {
     },
 
     async addPost(data: {title: string, body: string}) {
+      const url = useUrlStore().url
       const token = useCookie("testToken");
       try {
         // Backend API'ga POST so'rov yuborish
         const res = await axios.post(
-          "http://localhost:8080/api/post/create",
+          `${url}/post/create`,
           data,
           {
             headers: {

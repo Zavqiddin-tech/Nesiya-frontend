@@ -8,11 +8,12 @@ definePageMeta({
   ],
 });
 import { ref, reactive, onMounted } from "vue";
-import axios from "axios";
 import { io } from "socket.io-client";
 
 // strore 
-import { usePostStore } from "#build/imports";
+import { useAuthStore } from "~/stores/auth";
+import { usePostStore } from "~/stores/post/post";
+const authStore = useAuthStore()
 const postStore = usePostStore()
 
 const state = reactive([]);
@@ -34,7 +35,7 @@ const items = (row) => [
     {
       label: "Edit",
       icon: "i-heroicons-pencil-square-20-solid",
-      click: () => console.log("Edit", row._id),
+      click: () => console.log("Edit", row),
     },
     {
       label: "Duplicate",
@@ -77,7 +78,7 @@ const columns = [
 ];
 
 socket.on("newPost", (data) => {
-  postStore.posts.unshift(data);
+  if (data.user = authStore.user.id) postStore.posts.unshift(data);
 });
 onMounted(() => {
   postStore.getAllPost();
@@ -86,6 +87,9 @@ onMounted(() => {
 
 <template>
   <div>index</div>
+  <div>
+    <UIcon name="solar:home-angle-broken"/> 
+  </div>
   <div class="w-[200px]">
     <div class="mb-5">
       <UInput v-model="post.title" placeholder="title" />

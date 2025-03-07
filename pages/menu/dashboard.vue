@@ -16,7 +16,7 @@ definePageMeta({
 
 <template>
   dashboard
-  <UButton>CLick</UButton>
+  <UButton>Click</UButton>
   {{ token }}
 </template>
 

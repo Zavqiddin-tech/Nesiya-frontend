@@ -3,6 +3,7 @@ import axios from "axios";
 
 import { useUrlStore } from "./url";
 
+
 export const useAuthStore = defineStore("auth", {
   state: () => ({
     user: {},
@@ -22,9 +23,10 @@ export const useAuthStore = defineStore("auth", {
         );
 
         token.value = res.data.accessToken;
-        router.push("/");
+        navigateTo('/')
+        toast.add({ title: "Muvaffaqiyatli", description: "tizimga kirildi", icon: "material-symbols:check-circle-outline-rounded" });
       } catch (error: any) {
-        toast.add({ title: "Login yoki parol xato" });
+        toast.add({ title: "Tekshiring", description: "login yoki parol xato", icon: "solar:shield-warning-broken" });
       }
     },
     async checkUser() {
@@ -41,6 +43,7 @@ export const useAuthStore = defineStore("auth", {
           }
         );
         this.user = res.data;
+        console.log(this.user);
       } catch (error: any) {
         throw error;
       }

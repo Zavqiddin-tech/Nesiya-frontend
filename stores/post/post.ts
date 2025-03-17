@@ -27,6 +27,7 @@ export const usePostStore = defineStore("post", {
         });
 				this.posts = [...res.data]
         this.limit += 10
+        console.log(this.posts);
       } catch (error: any) {
         toast.add({ title: "Login yoki parol xato" });
       }

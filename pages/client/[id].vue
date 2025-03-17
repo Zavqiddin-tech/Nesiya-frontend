@@ -1,23 +1,22 @@
 <script setup lang="ts">
-const token = useCookie('testToken')
 
 useHead({
-  title: "dashboard",
+  title: "Mijozlar bo'limi",
 });
 definePageMeta({
   middleware: [
     function (to, from) {
       // Custom inline middleware
     },
-    'admin',
+    'user',
   ],
 });
+
+const router = useRouter();
+const id = router.currentRoute.value.params.id
 </script>
 
 <template>
-  dashboard
-  <UButton>Click</UButton>
-  {{ token }}
+	mijozlar 
+	{{ id }}
 </template>
-
-<style lang="scss"></style>

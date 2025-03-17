@@ -1,0 +1,22 @@
+<script setup lang="ts">
+
+useHead({
+  title: "Savdo bo'limi",
+});
+definePageMeta({
+  middleware: [
+    function (to, from) {
+      // Custom inline middleware
+    },
+    'user',
+  ],
+});
+
+const router = useRouter();
+const id = router.currentRoute.value.params.id
+</script>
+
+<template>
+	savdo 
+	{{ id }}
+</template>

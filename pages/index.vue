@@ -1,94 +1,53 @@
 <script setup>
+useHead({
+  title: "Dashboard",
+});
 definePageMeta({
   middleware: [
     function (to, from) {
       // Custom inline middleware
     },
-    "admin",
+    "user",
   ],
 });
-import { ref, reactive, onMounted } from "vue";
+import { reactive, onMounted } from "vue";
 import { io } from "socket.io-client";
+const toast = useToast();
 
-// strore 
+// strore
 import { useAuthStore } from "~/stores/auth";
 import { usePostStore } from "~/stores/post/post";
-const authStore = useAuthStore()
-const postStore = usePostStore()
+const authStore = useAuthStore();
+const postStore = usePostStore();
 
-const state = reactive([]);
 const post = reactive({ title: "", body: "" });
-const limit = ref(10);
 
 // Socket connection
-const socket = io("ws://localhost:8080"); // backent url
+const socket = io("ws://localhost:4100"); // backent url
 
 const addPost = async () => {
   if (post.title && post.body) {
-    postStore.addPost({title: post.title, body: post.body})
+    postStore.addPost({ title: post.title, body: post.body });
   } else {
-    toast.add({ title: "Barcha maydonni to'ldiring" });
+    toast.add({ title: "Barcha maydonni to'ldiring !" });
   }
 };
-const items = (row) => [
-  [
-    {
-      label: "Edit",
-      icon: "i-heroicons-pencil-square-20-solid",
-      click: () => console.log("Edit", row),
-    },
-    {
-      label: "Duplicate",
-      icon: "i-heroicons-document-duplicate-20-solid",
-    },
-  ],
-  [
-    {
-      label: "Archive",
-      icon: "i-heroicons-archive-box-20-solid",
-    },
-    {
-      label: "Move",
-      icon: "i-heroicons-arrow-right-circle-20-solid",
-    },
-  ],
-  [
-    {
-      label: "Delete",
-      icon: "i-heroicons-trash-20-solid",
-    },
-  ],
-];
-const columns = [
-  {
-    key: "title",
-    label: "Title",
-  },
-  {
-    key: "body",
-    label: "Body",
-  },
-  {
-    key: "_id",
-    label: "ID",
-  },
-  {
-    key: "actions",
-  },
-];
 
-socket.on("newPost", (data) => {
-  if (data.user = authStore.user.id) postStore.posts.unshift(data);
+
+
+socket.on(`newPost/${authStore.user.id}`, (data) => {
+  if ((data.user = authStore.user.id)) postStore.posts.unshift(data);
 });
 onMounted(() => {
   postStore.getAllPost();
 });
+
 </script>
 
 <template>
-  <div>index</div>
+
   <div>
-    <UIcon name="solar:home-angle-broken"/> 
+    <UIcon name="solar:home-angle-broken" />
   </div>
   <div class="w-[200px]">
     <div class="mb-5">
@@ -103,17 +62,7 @@ onMounted(() => {
   </div>
   <div>
     <div v-if="Array.isArray(postStore.posts) && postStore.posts.length > 0">
-      <UTable :rows="postStore.posts" :columns="columns">
-        <template #actions-data="{ row }">
-          <UDropdown :items="items(row)">
-            <UButton
-              color="gray"
-              variant="ghost"
-              icon="i-heroicons-ellipsis-horizontal-20-solid"
-            />
-          </UDropdown>
-        </template>
-      </UTable>
+ 
     </div>
     <div v-else>
       <div>Ma'lumotlar yo'q</div>

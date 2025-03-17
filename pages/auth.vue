@@ -1,7 +1,6 @@
 <script setup lang="ts">
-const router = useRouter()
 import { useAuthStore } from "~/stores/auth";
-const authStore = useAuthStore()
+const authStore = useAuthStore();
 useHead({
   title: "Authorization",
 });
@@ -15,11 +14,14 @@ const state = reactive({
   userName: "",
   password: "",
 });
-
+const toast = useToast();
 const login = () => {
-	authStore.login(state)
-}
-
+  if (state.userName && state.password) {
+    authStore.login(state);
+  } else {
+    toast.add({ title: "login parolni kiriting !" });
+  }
+};
 </script>
 
 <template>
@@ -47,11 +49,7 @@ const login = () => {
         />
 
         <!-- Submit button -->
-        <UButton
-          class="w-full"
-          color="primary"
-					@click="login()"
-        >
+        <UButton class="w-full" @click="login()">
           Login
         </UButton>
       </form>

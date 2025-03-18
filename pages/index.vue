@@ -10,20 +10,15 @@ definePageMeta({
     "user",
   ],
 });
-import { reactive, onMounted } from "vue";
-import { io } from "socket.io-client";
+import { reactive } from "vue";
+
 const toast = useToast();
 
 // strore
-import { useAuthStore } from "~/stores/auth";
 import { usePostStore } from "~/stores/post/post";
-const authStore = useAuthStore();
 const postStore = usePostStore();
 
 const post = reactive({ title: "", body: "" });
-
-// Socket connection
-const socket = io("ws://localhost:4100"); // backent url
 
 const addPost = async () => {
   if (post.title && post.body) {
@@ -32,20 +27,9 @@ const addPost = async () => {
     toast.add({ title: "Barcha maydonni to'ldiring !" });
   }
 };
-
-
-
-socket.on(`newPost/${authStore.user.id}`, (data) => {
-  if ((data.user = authStore.user.id)) postStore.posts.unshift(data);
-});
-onMounted(() => {
-  postStore.getAllPost();
-});
-
 </script>
 
 <template>
-
   <div>
     <UIcon name="solar:home-angle-broken" />
   </div>
@@ -61,14 +45,6 @@ onMounted(() => {
     </div>
   </div>
   <div>
-    <div v-if="Array.isArray(postStore.posts) && postStore.posts.length > 0">
- 
-    </div>
-    <div v-else>
-      <div>Ma'lumotlar yo'q</div>
-    </div>
-    <div class="flex justify-center">
-      <UButton @click="postStore.getAllPost()">Yana</UButton>
-    </div>
+    <TablePost />
   </div>
 </template>

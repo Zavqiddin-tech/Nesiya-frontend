@@ -8,7 +8,8 @@ export const usePostStore = defineStore("post", {
 
 	state: ()=> ({
 		posts: [] as any[],
-    limit: 10
+    limit: 10,
+    isEnd: false
 	}),
 
 
@@ -20,14 +21,18 @@ export const usePostStore = defineStore("post", {
       const toast = useToast();
 
       try {
-        // Backend API'ga GET so'rov yuborish
         const res = await axios.get(`${url}/post/get-all`, {
           params: { limit: this.limit },
           headers: { Authorization: `Bearer ${token.value}` },
         });
+        console.log(res.data);
 				this.posts = [...res.data]
+        if (res.data.length < this.limit) {
+          this.isEnd = true
+          return false
+        }
         this.limit += 10
-        console.log(this.posts);
+        console.log(this.limit);
       } catch (error: any) {
         toast.add({ title: "Login yoki parol xato" });
       }

@@ -3,7 +3,7 @@
     <div class=" w-[250px]  h-screen sticky top-0">
       <SideBar />
     </div>
-		<div class="main">
+		<div class="main p-5 pt-8">
       <slot />
     </div>
   </div>

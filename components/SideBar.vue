@@ -34,7 +34,7 @@ const router = useRouter();
 <template>
 	<div class="sidebar pt-8 h-full rounded-xl ">
 		<div>
-			<NuxtLink to="/dashboard" class="pl-10 text-xl font-semibold">
+			<NuxtLink to="/" class="pl-10 text-xl font-semibold">
 				<UIcon name="ic:round-stacked-line-chart" class="text-lime-300"/> Nesiya CRM
 			</NuxtLink>
 			<div class="w-[80%] h-1 m-auto mt-10 mb-12 rounded-4xl bg-lime-300"></div>

@@ -45,6 +45,6 @@ const addPost = async () => {
     </div>
   </div>
   <div>
-    <TablePost />
+    <TablePostTable />
   </div>
 </template>

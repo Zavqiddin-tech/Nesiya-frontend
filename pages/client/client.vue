@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 useHead({
   title: "Mijozlar bo'limi",
 });
@@ -8,17 +7,27 @@ definePageMeta({
     function (to, from) {
       // Custom inline middleware
     },
-    'user',
+    "user",
   ],
 });
 
-const router = useRouter();
+import { TableClientTable } from "#components";
+// store
+import { useModaltStore } from "~/stores/modal";
+const modalStore = useModaltStore();
 </script>
 
 <template>
- 
- {{ router.currentRoute.value.fullPath }}
- 
+  <ModalClientModal />
+  <div class="flex justify-between items-center">
+    <div class="text-xl">Mijozlar</div>
+    <div>
+      <UButton @click="modalStore.setModal(true)" size="md" class="text-md cursor-pointer">+ mijoz qo'shish</UButton>
+    </div>
+  </div>
+  <div>
+    <TableClientTable />
+  </div>
 </template>
 
 <style lang="scss"></style>

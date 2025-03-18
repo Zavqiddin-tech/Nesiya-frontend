@@ -72,7 +72,7 @@ onMounted(() => {
         </tr>
       </tbody>
     </table>
-    <div>
+    <div class="pt-10 flex justify-center">
       <UButton v-if="postStore.isEnd" color="error">TUGADI</UButton>
       <UButton v-else @click="postStore.getAllPost()">Yana</UButton>
     </div>

@@ -12,7 +12,6 @@ export const useAuthStore = defineStore("auth", {
   actions: {
     async login(data: { userName: string; password: string }) {
       const url = useUrlStore().url
-      const router = useRouter();
       const token = useCookie("testToken");
       const toast = useToast();
       try {

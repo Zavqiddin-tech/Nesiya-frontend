@@ -3,6 +3,7 @@ import { onMounted } from "vue";
 import { io } from "socket.io-client";
 import { useAuthStore } from "~/stores/auth";
 import { useClientStore } from "~/stores/post/client";
+import { UButton } from "#components";
 const authStore = useAuthStore();
 const clientStore = useClientStore();
 
@@ -19,6 +20,7 @@ const fDate = new Intl.DateTimeFormat("ru-RU", {
   dateStyle: "short",
 });
 onMounted(() => {
+  clientStore.reset()
   clientStore.getAllClient();
 });
 </script>
@@ -28,7 +30,7 @@ onMounted(() => {
     v-if="Array.isArray(clientStore.clients) && clientStore.clients.length > 0"
   >
     <table class="table-auto w-full">
-      <thead class="border-b border-zinc-400 text-left">
+      <thead class="border-b border-white/60 text-left">
         <tr>
           <th>#</th>
           <th class="py-4 font-medium">ism familya</th>
@@ -40,12 +42,15 @@ onMounted(() => {
       <tbody>
         <tr
           v-for="(item, index) of clientStore.clients"
-          class="border-b border-zinc-300 dark:hover:bg-white/10 light:hover:bg-black/20"
+          class="border-b border-white/50 dark:hover:bg-white/10 light:hover:bg-black/20"
         >
           <td class="min-w-8 py-3">{{ index + 1 }}</td>
           <td>
             <div class="flex items-center">
-              {{ item.fName }} {{ item.lName }}
+              <NuxtLink :to="`/client/${item._id}`"
+                >{{ item.fName }} {{ item.lName }}</NuxtLink
+              >
+
               <NuxtImg v-if="item.verify" class="w-5 ml-1" src="/verify.png" />
             </div>
           </td>

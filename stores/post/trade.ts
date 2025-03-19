@@ -3,27 +3,48 @@ import axios from "axios";
 
 import { useUrlStore } from "../url";
 
-export const useClientStore = defineStore("client", {
+export const useTradeStore = defineStore("trade", {
   state: () => ({
-    clients: [] as any[],
-    client: {},
+    trades: [] as any[],
+    trade: {},
     limit: 10,
     isEnd: false,
   }),
 
   actions: {
-    // Hamma mijozlarni olish
-    async getAllClient() {
+    // Hamma savdolarni olish
+    async getAllTrade() {
       const url = useUrlStore().url;
       const token = useCookie("testToken");
       const toast = useToast();
 
       try {
-        const res = await axios.get(`${url}/client/get-all`, {
+        const res = await axios.get(`${url}/trade/get-all`, {
           params: { limit: this.limit },
           headers: { Authorization: `Bearer ${token.value}` },
         });
-        this.clients = [...res.data];
+        this.trades = [...res.data];
+        if (res.data.length < this.limit) {
+          this.isEnd = true;
+          return false;
+        }
+        this.limit += 10;
+      } catch (error: any) {
+        toast.add({ title: "xatolik", description: error });
+      }
+    },
+    // Hamma savdolarni olish
+    async getAllTradeByClient(_id: string) {
+      const url = useUrlStore().url;
+      const token = useCookie("testToken");
+      const toast = useToast();
+
+      try {
+        const res = await axios.get(`${url}/trade/get-all-by-client/${_id}`, {
+          params: { limit: this.limit },
+          headers: { Authorization: `Bearer ${token.value}` },
+        });
+        this.trades = [...res.data];
         if (res.data.length < this.limit) {
           this.isEnd = true;
           return false;
@@ -34,30 +55,31 @@ export const useClientStore = defineStore("client", {
       }
     },
 
-    // bitta mijozni olish
-    async getOneClient(_id: string) {
+    // bitta savdo olish
+    async getOneTrade(_id: string) {
       const url = useUrlStore().url;
       const token = useCookie("testToken");
       const toast = useToast();
 
       try {
-        const res = await axios.get(`${url}/client/get-one/${_id}`, {
+        const res = await axios.get(`${url}/trade/get-one/${_id}`, {
           headers: { Authorization: `Bearer ${token.value}` },
         });
-        this.client = { ...res.data };
+        this.trade = { ...res.data };
+        console.log(res.data);
       } catch (error: any) {
         toast.add({ title: "xatolik", description: error });
       }
     },
 
     // yangi mijoz qo'shish
-    async addClient(data: {}) {
+    async addTrade(data: {}) {
       const url = useUrlStore().url;
       const token = useCookie("testToken");
       const toast = useToast();
       try {
         // Backend API'ga POST so'rov yuborish
-        const res = await axios.post(`${url}/client/create`, data, {
+        const res = await axios.post(`${url}/trade/create`, data, {
           headers: {
             Authorization: `Bearer ${token.value}`,
           },
@@ -65,7 +87,7 @@ export const useClientStore = defineStore("client", {
         if (res.status === 200) {
           toast.add({
             title: "Ro'yxatga olindi",
-            description: `${res.data.fName} ${res.data.lName}`,
+            description: `${res.data.newTrade.text}`,
             icon: "material-symbols:check-circle-outline-rounded",
           });
         }
@@ -76,8 +98,8 @@ export const useClientStore = defineStore("client", {
 
     // reset
     reset() {
-      this.limit = 10
-      this.isEnd = false
-    }
+      this.limit = 10;
+      this.isEnd = false;
+    },
   },
 });

@@ -11,7 +11,6 @@ definePageMeta({
   ],
 });
 
-import { TableClientTable } from "#components";
 // store
 import { useModaltStore } from "~/stores/modal";
 const modalStore = useModaltStore();

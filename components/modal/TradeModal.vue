@@ -1,8 +1,11 @@
 <script setup>
 import { reactive } from "vue";
 import { useModaltStore } from "~/stores/modal";
+import { useTradeStore } from "~/stores/post/trade";
 const modalStore = useModaltStore();
+const tradeStore = useTradeStore()
 
+const toast = useToast();
 const handleClose = () => {
   modalStore.setModal(false);
   modalStore.setUpModal(false);
@@ -11,7 +14,18 @@ const handleClose = () => {
 	state.price = ""
 };
 
-const state = reactive({});
+const router = useRouter();
+const _id = router.currentRoute.value.params._id;
+const state = reactive({clientId: _id});
+
+const addTrade = async () => {
+  if (state.text && state.price && state.clientId) {
+    tradeStore.addTrade({ ...state });
+    handleClose();
+  } else {
+    toast.add({ title: "Barcha maydonni to'ldiring !" });
+  }
+};
 </script>
 
 <template>
@@ -48,7 +62,7 @@ const state = reactive({});
         variant="soft"
         @click="handleClose"
       >bekor qilish</UButton>
-      <UButton>Qo'shish</UButton>
+      <UButton @click="addTrade">Qo'shish</UButton>
     </template>
   </UModal>
 </template>

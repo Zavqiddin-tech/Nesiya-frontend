@@ -1,22 +1,22 @@
 <script setup lang="ts">
-
 useHead({
-  title: "Mijozlar bo'limi",
+  title: "Savdo bo'limi",
 });
 definePageMeta({
   middleware: [
     function (to, from) {
       // Custom inline middleware
     },
-    'user',
+    "user",
   ],
 });
-
 const router = useRouter();
-const id = router.currentRoute.value.params.id
+const _id = router.currentRoute.value.params._id;
+
+;
 </script>
 
 <template>
-	mijozlar 
-	{{ id }}
+  savdo
+  {{ _id }}
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <div class=" w-[250px]  h-screen sticky top-0">
+    <div class="menu sm:w-[100px] lg:w-[250px]  h-screen sticky top-0">
       <SideBar />
     </div>
 		<div class="main p-5 pt-8">
@@ -13,4 +13,5 @@
 .main {
   width: calc(100% - 250px);
 }
+
 </style>

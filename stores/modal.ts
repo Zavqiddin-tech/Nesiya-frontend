@@ -5,6 +5,7 @@ export const useModaltStore = defineStore("modal", {
     modal: false,
     upModal: false,
     editId: "",
+    toggle: false
   }),
 
   actions: {
@@ -17,5 +18,8 @@ export const useModaltStore = defineStore("modal", {
     setEditId(val: string) {
       this.editId = val;
     },
+    setToggle(val: boolean) {
+      this.toggle = val
+    }
   },
 });

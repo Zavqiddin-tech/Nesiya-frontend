@@ -33,10 +33,10 @@ onMounted(() => {
       <thead class="border-b border-white/60 text-left">
         <tr>
           <th>#</th>
-          <th class="py-4 font-medium">ism familya</th>
-          <th class="py-4 font-medium">qarzdorlik</th>
-          <th class="py-4 font-medium">kiritildi</th>
-          <th class="py-4 font-medium">telefon</th>
+          <th class="py-4 font-medium text-sm sm:text-base">Ism familya</th>
+          <th class="py-4 font-medium text-sm sm:text-base">Qarzdorlik</th>
+          <th class="py-4 font-medium hidden sm:block">kiritildi</th>
+          <th class="py-4 font-medium ">Aloqa</th>
         </tr>
       </thead>
       <tbody>
@@ -44,35 +44,40 @@ onMounted(() => {
           v-for="(item, index) of clientStore.clients"
           class="border-b border-white/50 dark:hover:bg-white/10 light:hover:bg-black/20"
         >
-          <td class="min-w-8 py-3">{{ index + 1 }}</td>
+          <td class="min-w-8 py-3 text-xs sm:text-base">{{ index + 1 }}</td>
           <td>
             <div class="flex items-center">
-              <NuxtLink :to="`/client/${item._id}`"
-                >{{ item.fName }} {{ item.lName }}</NuxtLink
-              >
+              <NuxtLink :to="`/client/${item._id}`" class="capitalize whitespace-nowrap text-sm sm:text-base">
+                <span
+                  v-if="
+                    item.lName[0] == 's' ||
+                    (item.lName[0] == 'S' && item.lName[1] == 'h') ||
+                    item.lName[1] == 'H'
+                  "
+                >
+                  Sh.
+                </span>
+                <span v-else>{{ item.lName[0] }}.</span>
 
-              <NuxtImg v-if="item.verify" class="w-5 ml-1" src="/verify.png" />
+                {{ item.fName }}
+              </NuxtLink>
+
+              <NuxtImg v-if="item.verify" class="w-4 ml-1" src="/verify.png" />
             </div>
           </td>
-
           <td>
-            <UButton color="warning" variant="soft"
+            <UButton color="error" variant="soft"
               >{{
                 total(item.totalDebt, item.totalPurchase).toLocaleString()
               }}
               uzs</UButton
             >
           </td>
-          <td class="min-w-24">{{ fDate.format(new Date(item.createdAt)) }}</td>
+          <td class="min-w-24 hidden sm:block">{{ fDate.format(new Date(item.createdAt)) }}</td>
           <td>
             <div>
-              <UButton color="info" variant="subtle"
+              <UButton color="info" variant="subtle" size="xs"
                 >{{ item.phoneOne }}
-              </UButton>
-            </div>
-            <div v-if="item.phoneTwo" class="pt-2">
-              <UButton color="info" variant="subtle"
-                >{{ item.phoneTwo }}
               </UButton>
             </div>
           </td>

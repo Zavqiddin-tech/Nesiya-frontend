@@ -19,17 +19,20 @@ const modalStore = useModaltStore();
 <template>
   <ModalClientModal />
   <div class="flex justify-between items-center">
-    <div class="text-xl">Mijozlar</div>
+    <div class="text-md sm:text-xl">Mijozlar</div>
+    <div>
+      <UInput placeholder="Qidiruv"/>
+    </div>
     <div>
       <UButton
         @click="modalStore.setModal(true)"
         size="md"
-        class="text-md cursor-pointer"
+        class="text-xs sm:text-md cursor-pointer"
         >+ mijoz qo'shish</UButton
       >
     </div>
   </div>
-  <div>
+  <div class="pt-10">
     <TableClientTable />
   </div>
 </template>

@@ -46,7 +46,7 @@ const router = useRouter();
           :class="{ active: router.currentRoute.value.fullPath == item.url }"
         >
           <div class="px-5 py-3 flex items-center gap-3">
-            <UIcon :name="item.icon" size="25" />
+            <UIcon :name="item.icon"  size="25"/>
             <span class="font-medium hidden lg:inline">{{ item.name }}</span>
           </div>
         </NuxtLink>

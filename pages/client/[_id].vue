@@ -45,70 +45,111 @@ onMounted(() => {
       </div>
     </div>
   </div>
-  <div v-if="Object.keys(clientStore.client).length > 0" class="pt-12 flex">
+  <div
+    v-if="Object.keys(clientStore.client).length > 0"
+    class="pt-12 flex flex-col lg:flex-row"
+  >
     <!-- about client -->
-    <div class="min-w-[300px] min-h-[500px] p-3 pt-10 bg-gray-800 rounded-xl">
-      <div class="flex justify-center">
-        <NuxtImg
-          class="w-[150px] h-[150px] object-cover rounded-full"
-          src="/girl.jpg"
-        />
-      </div>
-      <div
-        class="pt-4 flex justify-center items-center text-xl font-medium capitalize"
-      >
-        {{ clientStore.client.fName }} {{ clientStore.client.lName }}
-        <NuxtImg
-          v-if="clientStore.client.verify"
-          class="w-6 ml-1"
-          src="/verify.png"
-        />
-      </div>
-      <div class="pt-2 flex justify-center">
-        <UBadge variant="soft" color="success">yangi mijoz</UBadge>
-      </div>
-      <div class="mt-10 p-2 border border-gray-500 rounded-lg">
-        <div class="text-xs font-medium">Telefon raqam 1</div>
-        <div class="text-sm font-medium">{{ clientStore.client.phoneOne }}</div>
-      </div>
-      <div class="mt-3 p-2 border border-gray-500 rounded-lg">
-        <div class="text-xs font-medium">Telefon raqam 2</div>
-        <div v-if="clientStore.client.phoneTwo" class="text-sm font-medium">
-          {{ clientStore.client.phoneTwo }}
+    <div
+      class="min-w-[300px] h-[220px] lg:h-[450px] p-3 pt-10 bg-gray-800 rounded-xl"
+    >
+      <div class="flex gap-5 justify-center lg:flex-col">
+        <div class="flex justify-center">
+          <NuxtImg
+            class="w-[100px] h-[100px] lg:w-[150px] lg:h-[150px] object-cover rounded-full"
+            src="/girl.jpg"
+          />
         </div>
-        <div v-else class="text-sm font-medium text-red-400">kiritilmagan</div>
+        <div>
+          <div
+            class="pt-4 flex justify-center items-center text-xl font-medium capitalize"
+          >
+            {{ clientStore.client.fName }} {{ clientStore.client.lName }}
+            <NuxtImg
+              v-if="clientStore.client.verify"
+              class="w-6 ml-1"
+              src="/verify.png"
+            />
+          </div>
+          <div class="pt-2 flex justify-center">
+            <UBadge variant="soft" color="success">yangi mijoz</UBadge>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5 flex lg:flex-col items-center justify-center gap-3">
+        <div class="flex items-center">
+          <div class="flex items-center text-sm font-medium text-blue-400">
+            <UIcon name="line-md:phone-call-loop" size="20" />:
+            {{ clientStore.client.phoneOne }}
+          </div>
+        </div>
+        <span class="lg:hidden">|</span>
+        <div class="flex items-center">
+          <div
+            v-if="clientStore.client.phoneTwo"
+            class="flex items-center text-sm font-medium text-blue-400"
+          >
+            <UIcon name="line-md:phone-call-loop" size="20" />:
+            {{ clientStore.client.phoneTwo }}
+          </div>
+          <div
+            v-else
+            class="flex items-center text-sm font-medium text-red-400"
+          >
+            <UIcon name="line-md:phone-call-loop" size="20" />: kiritilmagan
+          </div>
+        </div>
       </div>
     </div>
     <!-- statistika -->
-    <div class="w-full pl-5">
-      <div class="w-full mb-10 px-5 flex justify-around items-start gap-10 flex-wrap ">
-        <div class=" w-[250px] px-3 py-4 bg-gray-800 rounded-2xl md:w-[350px] lg:w-[250px] lg:border-amber-500">
-          <div class="text-[35px] text-sky-500">
-            {{ clientStore.client.totalDebt.toLocaleString() }}
-            <UBadge color="neutral" variant="outline">uzs</UBadge>
+    <div class="w-full lg:pl-5">
+      <div
+        class="w-full mt-10 mb-10 flex justify-around items-start flex-wrap lg:mt-0"
+      >
+        <!-- xarid -->
+        <div class="col p-3 w-4/12 lg:w-[250px]">
+          <div class="px-3 py-4 bg-gray-800 rounded-2xl lg:border-amber-500">
+            <div
+              class="text-[15px] sm:text-[20px] text-sky-500 whitespace-nowrap"
+            >
+              {{ clientStore.client.totalDebt.toLocaleString() }}
+              
+            </div>
+            <div class="text-[10px] font-medium sm:text-[16px]">Jami Xarid</div>
           </div>
-          <div class="font-medium">Jami Xarid</div>
         </div>
 
-        <div class=" w-[250px] px-3 py-4 bg-gray-800 rounded-2xl md:w-[350px] lg:w-[250px] lg:border-amber-500">
-          <div class="text-[35px] text-violet-400">
-            {{ clientStore.client.totalPurchase.toLocaleString() }}
-            <UBadge color="neutral" variant="outline">uzs</UBadge>
+        <!-- to'landi -->
+        <div class="col p-3 w-4/12 lg:w-[250px]">
+          <div class="px-3 py-4 bg-gray-800 rounded-2xl lg:border-amber-500">
+            <div
+              class="text-[15px] sm:text-[25px] text-violet-400 whitespace-nowrap"
+            >
+              {{ clientStore.client.totalPurchase.toLocaleString() }}
+              
+              
+            </div>
+            <div class="text-[10px] font-medium sm:text-[16px]">To'landi</div>
           </div>
-          <div class="font-medium">To'landi</div>
         </div>
 
-        <div class=" w-[250px] px-3 py-4 bg-gray-800 rounded-2xl md:w-[350px] lg:w-[250px] lg:border-amber-500">
-          <div class="text-[35px] text-pink-500">
-            {{
-              total(
-                clientStore.client.totalDebt,
-                clientStore.client.totalPurchase
-              ).toLocaleString()
-            }}
-            <UBadge color="neutral" variant="outline">uzs</UBadge>
+        <!-- qarzdorlik -->
+        <div class="col p-3 w-4/12 lg:w-[250px]">
+          <div class="px-3 py-4 bg-gray-800 rounded-2xl lg:border-amber-500">
+            <div
+              class="text-[15px] sm:text-[20px] text-pink-500 whitespace-nowrap"
+            >
+              {{
+                total(
+                  clientStore.client.totalDebt,
+                  clientStore.client.totalPurchase
+                ).toLocaleString()
+              }}
+              
+            </div>
+            <div class="text-[10px] font-medium sm:text-[16px]">Qarzdorlik</div>
           </div>
-          <div class="font-medium">Qarzdorlik</div>
         </div>
       </div>
       <TableClientTradeTable />

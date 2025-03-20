@@ -20,7 +20,7 @@ const fDate = new Intl.DateTimeFormat("ru-RU", {
   dateStyle: "short",
 });
 onMounted(() => {
-  clientStore.reset()
+  clientStore.reset();
   clientStore.getAllClient();
 });
 </script>
@@ -79,7 +79,7 @@ onMounted(() => {
         </tr>
       </tbody>
     </table>
-    <div class="pt-10 flex justify-center">
+    <div class="mt-5 flex justify-center">
       <UButton v-if="clientStore.isEnd" color="error">TUGADI</UButton>
       <UButton v-else @click="clientStore.getAllClient()">Yana</UButton>
     </div>

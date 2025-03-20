@@ -13,6 +13,7 @@ const tradeStore = useTradeStore();
 // Socket connection
 const socket = io("ws://localhost:4100"); // backent url
 socket.on(`newTrade/${authStore.user.id}`, (data) => {
+  console.log(data);
   tradeStore.trades.unshift(data.newTrade);
   clientStore.client = { ...data.newClient };
   console.log(data.newClient);

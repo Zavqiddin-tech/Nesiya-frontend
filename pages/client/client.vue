@@ -21,7 +21,12 @@ const modalStore = useModaltStore();
   <div class="flex justify-between items-center">
     <div class="text-xl">Mijozlar</div>
     <div>
-      <UButton @click="modalStore.setModal(true)" size="md" class="text-md cursor-pointer">+ mijoz qo'shish</UButton>
+      <UButton
+        @click="modalStore.setModal(true)"
+        size="md"
+        class="text-md cursor-pointer"
+        >+ mijoz qo'shish</UButton
+      >
     </div>
   </div>
   <div>

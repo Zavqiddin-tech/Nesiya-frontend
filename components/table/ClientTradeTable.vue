@@ -1,14 +1,16 @@
 <script setup>
-import { onMounted } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { io } from "socket.io-client";
 
 // strore
 import { useAuthStore } from "~/stores/auth";
 import { useClientStore } from "~/stores/post/client";
 import { useTradeStore } from "~/stores/post/trade";
+import { usePayStore } from "~/stores/post/pay";
 const authStore = useAuthStore();
 const clientStore = useClientStore();
 const tradeStore = useTradeStore();
+const payStore = usePayStore();
 
 // Socket connection
 const socket = io("ws://localhost:4100"); // backent url
@@ -23,8 +25,21 @@ const _id = router.currentRoute.value.params._id;
 const total = (a, b) => {
   return a - b;
 };
+
+const toggle = ref(false);
+const state = reactive({ clientId: _id });
+
+const add = async () => {
+  console.log(state);
+  const res = await payStore.addPay(state)
+  console.log(res.data);
+};
+
 const fDate = new Intl.DateTimeFormat("ru-RU", {
   dateStyle: "short",
+});
+const fTime = new Intl.DateTimeFormat("ru-RU", {
+  timeStyle: "short",
 });
 onMounted(() => {
   tradeStore.reset();
@@ -82,14 +97,12 @@ onMounted(() => {
               class="text-xs sm:text-base"
             >
               {{ total(item.price, item.paid).toLocaleString() }}
-
             </UButton>
           </td>
           <td>
-            <UDrawer
-              title="To'lov qilish va monitoring"
-            >
+            <UDrawer title="To'lov qilish va monitoring">
               <UButton
+                @click="state.tradeId = item._id"
                 color="success"
                 variant="soft"
                 class="text-xs sm:text-base"
@@ -98,9 +111,45 @@ onMounted(() => {
               </UButton>
 
               <template #body>
-                <div class="min-h-[300px]">
-                  {{ item.payHistory }}
-                  <UInput />
+                <div class="min-h-[300px] mb-15 relative">
+                  <div
+                    v-if="item.payHistory.length > 0"
+                    v-for="pay of item.payHistory"
+                  >
+                    <div>
+                      <USeparator
+                        :label="fDate.format(new Date(pay.createdAt))"
+                        color="primary"
+                        type="dashed"
+                      />
+                      <div class="text-sm">Pul o'tkazmasi</div>
+                      <div>
+                        <span class="pr-3 text-xs font-bold text-green-400"
+                          >Muvaffaqiyatli</span
+                        >
+                        <span class="text-sm text-gray-300">{{
+                          fTime.format(new Date(pay.createdAt))
+                        }}</span>
+                      </div>
+                      <div class="text-xl font-bold">
+                        {{ pay.amount.toLocaleString() }}
+                      </div>
+                      <div>{{ pay.detail }}</div>
+                    </div>
+                  </div>
+                  <div v-else>to'lov mavjud emas</div>
+                  <div
+                    class="h-[50px] w-full flex justify-center items-center gap-3 fixed bottom-0 bg-zinc-900"
+                  >
+                    <UInput
+                      v-model="state.amount"
+                      type="number"
+                      variant="subtle"
+                      size="xl"
+                      placeholder="pul o'tkazish"
+                    />
+                    <UButton @click="add" size="xl">To'lash</UButton>
+                  </div>
                 </div>
               </template>
             </UDrawer>

@@ -17,7 +17,17 @@ const socket = io("ws://localhost:4100"); // backent url
 socket.on(`newTrade/${authStore.user.id}`, (data) => {
   tradeStore.trades.unshift(data.newTrade);
   clientStore.client = { ...data.newClient };
-  console.log(data.newClient);
+});
+socket.on(`newPay/${authStore.user.id}`, (data) => {
+  console.log(data);
+  clientStore.client = { ...data.updatedClient };
+  tradeStore.trades.forEach((item) => {
+    if (item._id == data.newPay.tradeId) {
+      item.paid += data.newPay.amount
+      item.payHistory.unshift(data.newPay);
+      console.log(item);
+    } 
+  });
 });
 
 const router = useRouter();
@@ -26,13 +36,11 @@ const total = (a, b) => {
   return a - b;
 };
 
-const toggle = ref(false);
-const state = reactive({ clientId: _id });
+const state = reactive({ clientId: _id, amount: null });
 
-const add = async () => {
-  console.log(state);
-  const res = await payStore.addPay(state)
-  console.log(res.data);
+const add = () => {
+  payStore.addPay(state);
+  state.amount  = null
 };
 
 const fDate = new Intl.DateTimeFormat("ru-RU", {

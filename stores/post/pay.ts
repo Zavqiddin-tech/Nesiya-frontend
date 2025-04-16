@@ -25,12 +25,16 @@ export const usePayStore = defineStore("pay", {
 				if (res.status === 200) {
 					toast.add({
 						title: "To'lov qilindi",
-						description: `${res.data.amount}`,
+						description: `${res.data.newPay.amount}`,
 						icon: "material-symbols:check-circle-outline-rounded",
 					});
-					return res
 				}
 			} catch (error: any) {
+				toast.add({
+					title: "Xatolik",
+					description: `${error.response.data.message}`,
+					icon: "material-symbols:check-circle-outline-rounded",
+				});
 				throw error;
 			}
 		},

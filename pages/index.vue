@@ -31,20 +31,9 @@ const addPost = async () => {
 
 <template>
   <div>
-    <UIcon name="solar:home-angle-broken" />
-  </div>
-  <div class="w-[200px]">
-    <div class="mb-5">
-      <UInput v-model="post.title" placeholder="title" />
-    </div>
-    <div class="mb-5">
-      <UInput v-model="post.body" placeholder="body" />
-    </div>
-    <div>
-      <UButton @click="addPost()">Click</UButton>
-    </div>
-  </div>
-  <div>
-    <TablePostTable />
+    <UiProgressBar
+      :progress="76"
+    />
+    
   </div>
 </template>

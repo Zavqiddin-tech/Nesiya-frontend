@@ -5,7 +5,7 @@ export const useModaltStore = defineStore("modal", {
     modal: false,
     upModal: false,
     editId: "",
-    toggle: false
+    toggle: false,
   }),
 
   actions: {

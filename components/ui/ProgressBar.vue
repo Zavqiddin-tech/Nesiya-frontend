@@ -1,66 +1,80 @@
 <template>
-  <div class="relative w-[120px] h-[120px]">
-    <svg class="transform -rotate-90" width="120" height="120">
-      <circle
-        class="text-gray-300"
-        stroke-width="10"
-        stroke="currentColor"
-        fill="transparent"
-        r="52"
-        cx="60"
-        cy="60"
-      />
-      <circle
-        class="text-blue-500"
-        stroke-width="10"
-        :stroke-dasharray="circumference"
-        :stroke-dashoffset="offset"
-        stroke-linecap="round"
-        stroke="currentColor"
-        fill="transparent"
-        r="52"
-        cx="60"
-        cy="60"
-      />
-    </svg>
-    <div class="absolute inset-0 flex items-center justify-center text-xl font-bold text-blue-500">
-      {{ percent }}%
+  <div class="progress">
+    <div class="barOverflow">
+      <div class="bar" :style="{ transform: rotation }"></div>
     </div>
+    <span class="text-xl font-medium">{{ displayValue }}%</span>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 
 const props = defineProps<{
   progress: number
+  duration?: number // optional, milliseconds
 }>()
 
-const radius = 52
-const circumference = 2 * Math.PI * radius
+const displayValue = ref(0)
+const rotation = ref('rotate(45deg)') // 0% starts at 45deg
 
-const offset = ref(circumference)
+const animateProgress = () => {
+  const start = performance.now()
+  const from = 0
+  const to = props.progress
+  const duration = props.duration ?? 3000
 
-const progress = ref(props.progress)
+  const step = (timestamp: number) => {
+    const elapsed = timestamp - start
+    const progressRatio = Math.min(elapsed / duration, 1)
+    const current = from + (to - from) * progressRatio
 
-const percent = ref(0)
+    displayValue.value = Math.floor(current)
+    rotation.value = `rotate(${45 + current * 1.8}deg)`
+
+    if (progressRatio < 1) {
+      requestAnimationFrame(step)
+    }
+  }
+
+  requestAnimationFrame(step)
+}
 
 onMounted(() => {
-  const intervalId = setInterval(() => {
-    if (percent.value < props.progress) {
-      percent.value++ 
-      offset.value = circumference - (percent.value / 100) * circumference 
-    } else {
-      clearInterval(intervalId) 
-    }
-  }, 15) 
+  animateProgress()
+})
+
+watch(() => props.progress, () => {
+  animateProgress()
 })
 </script>
 
 <style scoped>
-svg circle {
-  transition: stroke-dashoffset 0.35s ease;
-  transform: rotate(0.25turn);
-  transform-origin: center;
+.progress {
+  position: relative;
+  margin: 4px;
+  text-align: center;
+  width: 150px;
+  height: 150px;
+}
+.barOverflow {
+  position: relative;
+  overflow: hidden;
+  width: 150px;
+  height: 75px;
+  margin-bottom: -28px;
+}
+.bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: 8px solid #eee;
+  border-bottom-color: #bbf451;
+  border-right-color: #bbf451;
+  transition: transform 0.1s linear;
 }
 </style>

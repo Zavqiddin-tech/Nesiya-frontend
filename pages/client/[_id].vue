@@ -108,10 +108,10 @@ onMounted(() => {
         class="w-full mt-10 mb-10 flex justify-around items-start flex-wrap lg:mt-0"
       >
         <!-- xarid -->
-        <div class="col p-3 w-4/12 lg:w-[250px]">
-          <div class="px-3 py-4 bg-gray-800 rounded-2xl lg:border-amber-500">
+        <div class=" p-3 w-4/12 lg:w-[250px]">
+          <div class="px-3 py-4 bg-gray-800 rounded-2xl ">
             <div
-              class="text-[15px] sm:text-[20px] text-sky-500 whitespace-nowrap"
+              class="text-[15px] sm:text-[25px] text-sky-500 whitespace-nowrap"
             >
               {{ clientStore.client.totalDebt.toLocaleString() }}
               
@@ -121,8 +121,8 @@ onMounted(() => {
         </div>
 
         <!-- to'landi -->
-        <div class="col p-3 w-4/12 lg:w-[250px]">
-          <div class="px-3 py-4 bg-gray-800 rounded-2xl lg:border-amber-500">
+        <div class=" p-3 w-4/12 lg:w-[250px]">
+          <div class="px-3 py-4 bg-gray-800 rounded-2xl ">
             <div
               class="text-[15px] sm:text-[25px] text-violet-400 whitespace-nowrap"
             >
@@ -135,8 +135,8 @@ onMounted(() => {
         </div>
 
         <!-- qarzdorlik -->
-        <div class="col p-3 w-4/12 lg:w-[250px]">
-          <div class="px-3 py-4 bg-gray-800 rounded-2xl lg:border-amber-500">
+        <div class=" p-3 w-4/12 lg:w-[250px]">
+          <div class="px-3 py-4 bg-gray-800 rounded-2xl">
             <div
               class="text-[15px] sm:text-[20px] text-pink-500 whitespace-nowrap"
             >

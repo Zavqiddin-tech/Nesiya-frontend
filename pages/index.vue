@@ -10,30 +10,22 @@ definePageMeta({
     "user",
   ],
 });
-import { reactive } from "vue";
-
-const toast = useToast();
 
 // strore
-import { usePostStore } from "~/stores/post/post";
-const postStore = usePostStore();
-
-const post = reactive({ title: "", body: "" });
-
-const addPost = async () => {
-  if (post.title && post.body) {
-    postStore.addPost({ title: post.title, body: post.body });
-  } else {
-    toast.add({ title: "Barcha maydonni to'ldiring !" });
-  }
-};
+import { useAuthStore } from "~/stores/auth";
+const authStore = useAuthStore();
+const { user } = authStore;
 </script>
 
 <template>
   <div>
-    <UiProgressBar
-      :progress="76"
-    />
     
+
+    <UiResultCards
+      :clientCount="user.clientCount"
+      :totalPay="user.totalPay"
+      :debts="user.debts"
+    />
+    <UiProgressBar :progress="76" />
   </div>
 </template>

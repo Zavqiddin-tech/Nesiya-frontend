@@ -26,8 +26,7 @@ const modalStore = useModaltStore();
     <div>
       <UButton
         @click="modalStore.setModal(true)"
-        size="md"
-        class="text-xs sm:text-md cursor-pointer"
+        class="text-md cursor-pointer"
         >+ mijoz qo'shish</UButton
       >
     </div>

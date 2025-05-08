@@ -9,6 +9,7 @@
       <Navigation />
     </div>
     <div class="main w-full mb-10 p-5 pt-8 sm:mb-0">
+      
       <slot />
     </div>
   </div>

@@ -10,7 +10,6 @@ const today = reactive({
 });
 const props = defineProps<{
   clientCount: number;
-  totalPay: number;
   debts: number;
 }>();
 

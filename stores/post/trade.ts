@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 
 import { useUrlStore } from "../url";
+import { useClientStore } from "./client";
 
 export const useTradeStore = defineStore("trade", {
   state: () => ({
@@ -75,6 +76,7 @@ export const useTradeStore = defineStore("trade", {
     // yangi mijoz qo'shish
     async addTrade(data: {}) {
       const url = useUrlStore().url;
+      const clientStore = useClientStore();
       const token = useCookie("testToken");
       const toast = useToast();
       try {
@@ -85,6 +87,8 @@ export const useTradeStore = defineStore("trade", {
           },
         });
         if (res.status === 200) {
+          this.trades.unshift(res.data.newTrade);
+          clientStore.client = { ...res.data.newClient };
           toast.add({
             title: "Ro'yxatga olindi",
             description: `${res.data.newTrade.text}`,

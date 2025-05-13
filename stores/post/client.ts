@@ -9,6 +9,7 @@ export const useClientStore = defineStore("client", {
     client: {},
     limit: 10,
     isEnd: false,
+    toggleLoading: false,
   }),
 
   actions: {
@@ -63,6 +64,7 @@ export const useClientStore = defineStore("client", {
           },
         });
         if (res.status === 200) {
+          this.clients.unshift(res.data);
           toast.add({
             title: "Ro'yxatga olindi",
             description: `${res.data.fName} ${res.data.lName}`,
@@ -71,6 +73,32 @@ export const useClientStore = defineStore("client", {
         }
       } catch (error: any) {
         throw error;
+      }
+    },
+
+    async searchClient(name: string) {
+      const url = useUrlStore().url;
+      const token = useCookie("testToken");
+      const toast = useToast();
+
+      try {
+        const res = await axios.get(`${url}/client/search`, {
+          params: { name: name, limit: this.limit },
+          headers: { Authorization: `Bearer ${token.value}` },
+        });
+        if (res.status === 200) {
+          this.clients = [...res.data];
+          this.toggleLoading = false;
+          if (res.data.length < this.limit) {
+          this.isEnd = true;
+          return false;
+        }
+        this.limit += 10;
+        this.toggleLoading = false;
+        }
+      } catch (error: any) {
+        toast.add({ title: "xatolik", description: error });
+        this.toggleLoading = false;
       }
     },
 

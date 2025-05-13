@@ -21,8 +21,10 @@ const { user } = authStore;
 const allTrade = ref(0);
 const percentage = ref(0);
 const calculatePaid = () => {
-  allTrade.value = user.totalPay + user.debts;
-  percentage.value = (user.totalPay / allTrade.value) * 100;
+  const totalPay = user.totalPay || 0;
+  const debts = user.debts || 0;
+  allTrade.value = totalPay + debts;
+  percentage.value = (totalPay / allTrade.value) * 100;
 
   if(Number.isInteger(percentage.value)) {
     percentage.value = percentage.value.toFixed(0);

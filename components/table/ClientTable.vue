@@ -1,17 +1,8 @@
 <script setup>
 import { onMounted } from "vue";
-import { io } from "socket.io-client";
-import { useAuthStore } from "~/stores/auth";
 import { useClientStore } from "~/stores/post/client";
-import { UButton } from "#components";
-const authStore = useAuthStore();
 const clientStore = useClientStore();
 
-// Socket connection
-const socket = io("ws://localhost:4100"); // backent url
-socket.on(`newClient/${authStore.user.id}`, (data) => {
-  clientStore.clients.unshift(data);
-});
 
 const total = (a, b) => {
   return a - b;

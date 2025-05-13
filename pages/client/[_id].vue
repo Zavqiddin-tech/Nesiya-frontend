@@ -55,14 +55,12 @@ onMounted(() => {
     >
       <div class="flex gap-5 justify-center lg:flex-col">
         <div class="flex justify-center">
-          <NuxtImg
-            class="w-[100px] h-[100px] lg:w-[150px] lg:h-[150px] object-cover rounded-full"
-            src="/girl.jpg"
-          />
+          
+          <UIcon name="ic:round-person" class="text-[80px]"/>
         </div>
         <div>
           <div
-            class="pt-4 flex justify-center items-center text-xl font-medium capitalize"
+            class="pt-4 flex justify-center items-center text-xl font-medium capitalize lg:pt-0"
           >
             {{ clientStore.client.fName }} {{ clientStore.client.lName }}
             <NuxtImg
@@ -108,10 +106,10 @@ onMounted(() => {
         class="w-full mt-10 mb-10 flex justify-around items-start flex-wrap lg:mt-0"
       >
         <!-- xarid -->
-        <div class=" p-3 w-4/12 lg:w-[250px]">
+        <div class=" p-3 w-6/12 lg:w-[260px]">
           <div class="px-3 py-4 bg-gray-800 rounded-2xl ">
             <div
-              class="text-[15px] sm:text-[25px] text-sky-500 whitespace-nowrap"
+              class="text-[16px] sm:text-[22px] text-sky-500 whitespace-nowrap"
             >
               {{ clientStore.client.totalDebt.toLocaleString() }}
               
@@ -121,10 +119,10 @@ onMounted(() => {
         </div>
 
         <!-- to'landi -->
-        <div class=" p-3 w-4/12 lg:w-[250px]">
+        <div class=" p-3 w-6/12 lg:w-[260px]">
           <div class="px-3 py-4 bg-gray-800 rounded-2xl ">
             <div
-              class="text-[15px] sm:text-[25px] text-violet-400 whitespace-nowrap"
+              class="text-[16px] sm:text-[22px] text-violet-400 whitespace-nowrap"
             >
               {{ clientStore.client.totalPurchase.toLocaleString() }}
               
@@ -135,10 +133,10 @@ onMounted(() => {
         </div>
 
         <!-- qarzdorlik -->
-        <div class=" p-3 w-4/12 lg:w-[250px]">
+        <div class=" p-3 w-12/12 lg:w-[260px]">
           <div class="px-3 py-4 bg-gray-800 rounded-2xl">
             <div
-              class="text-[15px] sm:text-[20px] text-pink-500 whitespace-nowrap"
+              class="text-[16px] sm:text-[22px] text-pink-500 whitespace-nowrap"
             >
               {{
                 total(

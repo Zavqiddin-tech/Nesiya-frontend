@@ -6,7 +6,7 @@ import { usePostStore } from "~/stores/post/post";
 const authStore = useAuthStore();
 const postStore = usePostStore();
 // Socket connection
-const socket = io("ws://localhost:4100"); // backent url
+const socket = io("https://nesiya.zavqiddin.uz"); // backent url
 socket.on(`newPost/${authStore.user.id}`, (data) => {
   postStore.posts.unshift(data);
 });

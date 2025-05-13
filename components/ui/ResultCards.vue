@@ -28,7 +28,7 @@ onMounted(() => {
         <div class="py-1">Bugun</div>
         <div class="text-xl font-bold">
           {{ today.debts.toLocaleString() }}
-          <span class="text-sm font-normal">so'm</span>
+          <span class="text-sm font-normal">so'm to'landi</span>
         </div>
         <div
           class="w-3 h-14 absolute right-0 bottom-9 rounded-tl-lg rounded-bl-lg bg-linear-to-b from-blue-900 to-blue-500"

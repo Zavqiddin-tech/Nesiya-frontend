@@ -1,34 +1,13 @@
 <script setup>
-import { ref, reactive, onMounted } from "vue";
-import { io } from "socket.io-client";
+import { reactive, onMounted } from "vue";
 
 // strore
-import { useAuthStore } from "~/stores/auth";
-import { useClientStore } from "~/stores/post/client";
 import { useTradeStore } from "~/stores/post/trade";
 import { usePayStore } from "~/stores/post/pay";
-const authStore = useAuthStore();
-const clientStore = useClientStore();
 const tradeStore = useTradeStore();
 const payStore = usePayStore();
 
-// Socket connection
-const socket = io("ws://localhost:4100"); // backent url
-socket.on(`newTrade/${authStore.user.id}`, (data) => {
-  tradeStore.trades.unshift(data.newTrade);
-  clientStore.client = { ...data.newClient };
-});
-socket.on(`newPay/${authStore.user.id}`, (data) => {
-  console.log(data);
-  clientStore.client = { ...data.updatedClient };
-  tradeStore.trades.forEach((item) => {
-    if (item._id == data.newPay.tradeId) {
-      item.paid += data.newPay.amount
-      item.payHistory.unshift(data.newPay);
-      console.log(item);
-    } 
-  });
-});
+
 
 const router = useRouter();
 const _id = router.currentRoute.value.params._id;

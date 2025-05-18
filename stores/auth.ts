@@ -42,7 +42,6 @@ export const useAuthStore = defineStore("auth", {
           }
         );
         this.user = res.data;
-        console.log(this.user);
       } catch (error: any) {
         throw error;
       }

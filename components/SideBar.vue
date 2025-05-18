@@ -3,27 +3,27 @@ const menu = [
   {
     name: "Dashboard",
     url: "/",
-    icon: "solar:home-angle-broken",
+    icon: "fa-solid fa-house",
   },
   {
     name: "Savdo",
     url: "/trade/trade",
-    icon: "solar:chart-square-broken",
+    icon: "fa-solid fa-chart-simple",
   },
   {
     name: "Mijozlar",
     url: "/client/client",
-    icon: "solar:users-group-rounded-broken",
+    icon: "fa-solid fa-users",
   },
   {
     name: "Document",
     url: "/document/document",
-    icon: "solar:document-text-broken",
+    icon: "fa-solid fa-file-lines",
   },
   {
     name: "To'lov",
     url: "/document/payment",
-    icon: "solar:wallet-money-broken",
+    icon: "fa-solid fa-wallet",
   },
 ];
 
@@ -31,10 +31,13 @@ const router = useRouter();
 </script>
 
 <template>
-  <div class="sidebar  pt-8 h-full">
+  <div class="sidebar pt-8 h-full">
     <div>
-      <NuxtLink to="/" class="pl-10 text-xl font-semibold flex items-center gap-2">
-        <UIcon name="ic:round-stacked-line-chart" class="text-lime-300" />
+      <NuxtLink
+        to="/"
+        class="pl-10 text-xl font-semibold flex items-center gap-2"
+      >
+        <i class="fa-solid fa-chart-line text-lime-300"></i>
         <span class="hidden lg:inline">Nesiya CRM</span>
       </NuxtLink>
       <div class="w-[80%] h-1 m-auto mt-10 mb-12 rounded-4xl bg-lime-300"></div>
@@ -46,7 +49,7 @@ const router = useRouter();
           :class="{ active: router.currentRoute.value.fullPath == item.url }"
         >
           <div class="px-5 py-3 flex items-center gap-3">
-            <UIcon :name="item.icon"  size="25"/>
+            <i :class="`${item.icon} text-lg`"></i>
             <span class="font-medium hidden lg:inline">{{ item.name }}</span>
           </div>
         </NuxtLink>
@@ -65,5 +68,4 @@ const router = useRouter();
   border-bottom-left-radius: 5px;
   border-left: 3px solid #bbf451;
 }
-
 </style>

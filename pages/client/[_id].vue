@@ -56,7 +56,7 @@ onMounted(() => {
       <div class="flex gap-5 justify-center lg:flex-col">
         <div class="flex justify-center">
           
-          <UIcon name="ic:round-person" class="text-[80px]"/>
+          <Icon name="ic:round-person" class="text-[80px]"/>
         </div>
         <div>
           <div
@@ -78,7 +78,7 @@ onMounted(() => {
       <div class="mt-5 flex lg:flex-col items-center justify-center gap-3">
         <div class="flex items-center">
           <div class="flex items-center text-sm font-medium text-blue-400">
-            <UIcon name="line-md:phone-call-loop" size="20" />:
+            <Icon name="line-md:phone-call-loop" size="20" />:
             {{ clientStore.client.phoneOne }}
           </div>
         </div>
@@ -88,14 +88,14 @@ onMounted(() => {
             v-if="clientStore.client.phoneTwo"
             class="flex items-center text-sm font-medium text-blue-400"
           >
-            <UIcon name="line-md:phone-call-loop" size="20" />:
+            <Icon name="line-md:phone-call-loop" size="20" />:
             {{ clientStore.client.phoneTwo }}
           </div>
           <div
             v-else
             class="flex items-center text-sm font-medium text-red-400"
           >
-            <UIcon name="line-md:phone-call-loop" size="20" />: kiritilmagan
+            <Icon name="line-md:phone-call-loop" size="20" />: kiritilmagan
           </div>
         </div>
       </div>

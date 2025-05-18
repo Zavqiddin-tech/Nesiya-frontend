@@ -25,14 +25,12 @@ export const usePostStore = defineStore("post", {
           params: { limit: this.limit },
           headers: { Authorization: `Bearer ${token.value}` },
         });
-        console.log(res.data);
 				this.posts = [...res.data]
         if (res.data.length < this.limit) {
           this.isEnd = true
           return false
         }
         this.limit += 10
-        console.log(this.limit);
       } catch (error: any) {
         toast.add({ title: "Login yoki parol xato" });
       }

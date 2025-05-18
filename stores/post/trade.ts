@@ -67,7 +67,6 @@ export const useTradeStore = defineStore("trade", {
           headers: { Authorization: `Bearer ${token.value}` },
         });
         this.trade = { ...res.data };
-        console.log(res.data);
       } catch (error: any) {
         toast.add({ title: "xatolik", description: error });
       }

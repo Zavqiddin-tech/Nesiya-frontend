@@ -29,7 +29,6 @@ export const usePayStore = defineStore("pay", {
             if (item._id == res.data.newPay.tradeId) {
               item.paid += res.data.newPay.amount;
               item.payHistory.unshift(res.data.newPay);
-              console.log(item);
             }
           });
           toast.add({

@@ -2,23 +2,23 @@
 const menu = [
   {
     url: "/",
-    icon: "solar:home-angle-broken",
+    icon: "fa-solid fa-house",
   },
   {
     url: "/trade/trade",
-    icon: "solar:chart-square-broken",
+    icon: "fa-solid fa-chart-simple",
   },
   {
     url: "/client/client",
-    icon: "solar:users-group-rounded-broken",
+    icon: "fa-solid fa-users",
   },
   {
     url: "/document/document",
-    icon: "solar:document-text-broken",
+    icon: "fa-solid fa-file-lines",
   },
   {
     url: "/document/payment",
-    icon: "solar:wallet-money-broken",
+    icon: "fa-solid fa-wallet",
   },
 ];
 
@@ -26,7 +26,7 @@ const router = useRouter();
 </script>
 
 <template>
-  <div class="sidebar w-full z-10 fixed bottom-0 backdrop-blur-sm">
+  <div class="sidebar pb-2 w-full z-10 fixed bottom-0 backdrop-blur-sm">
     <ul class="admin-list ml-5 mr-5 flex justify-between">
       <li v-for="(item, index) in menu" :key="index">
         <NuxtLink
@@ -34,7 +34,7 @@ const router = useRouter();
           :class="{ active: router.currentRoute.value.fullPath == item.url }"
         >
           <div class="px-5 py-3 flex items-center gap-3">
-            <UIcon :name="item.icon" size="25" />
+            <i :class="`${item.icon} text-lg`"></i>
           </div>
         </NuxtLink>
       </li>

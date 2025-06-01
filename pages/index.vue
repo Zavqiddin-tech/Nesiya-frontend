@@ -26,12 +26,11 @@ const calculatePaid = () => {
   allTrade.value = totalPay + debts;
   percentage.value = (totalPay / allTrade.value) * 100;
 
-  if(Number.isInteger(percentage.value)) {
+  if (Number.isInteger(percentage.value)) {
     percentage.value = percentage.value.toFixed(0);
   } else {
     percentage.value = percentage.value.toFixed(2);
   }
-  
 };
 
 onMounted(() => {
@@ -41,11 +40,8 @@ onMounted(() => {
 
 <template>
   <div>
-    <UiResultCards
-      :clientCount="user.clientCount"
-      :debts="user.debts"
-    />
-    <UiProgressBar :progress="Number(percentage)" />
+    <UiResultCards :clientCount="user.clientCount" :debts="user.debts" />
 
+    <UiProgressBar :progress="Number(percentage)" />
   </div>
 </template>

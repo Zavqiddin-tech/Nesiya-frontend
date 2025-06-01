@@ -1,9 +1,13 @@
 <template>
-  <div class="progress">
-    <div class="barOverflow">
-      <div class="bar" :style="{ transform: rotation }"></div>
+  <div class="mt-10 px-5 py-8   inline-block rounded-2xl bg-gray-800">
+    <div class="progress">
+      <div class="pb-3 text-sm font-light">To'lov</div>
+      <div class="barOverflow">
+        <div class="bar" :style="{ transform: rotation }"></div>
+      </div>
+      <span class="text-xl font-medium">{{ displayValue }}%</span>
+      <div class="pt-2 text-sm font-light">qarzdorlik to'landi</div>
     </div>
-    <span class="text-xl font-medium">{{ displayValue }}%</span>
   </div>
 </template>
 
@@ -55,7 +59,6 @@ watch(() => props.progress, () => {
   margin: 4px;
   text-align: center;
   width: 150px;
-  height: 150px;
 }
 .barOverflow {
   position: relative;

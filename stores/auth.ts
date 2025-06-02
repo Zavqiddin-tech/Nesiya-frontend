@@ -24,7 +24,6 @@ export const useAuthStore = defineStore("auth", {
         toast.add({
           title: "Tekshiring",
           description: "login yoki parol xato",
-          icon: "solar:shield-warning-broken",
         });
       }
     },

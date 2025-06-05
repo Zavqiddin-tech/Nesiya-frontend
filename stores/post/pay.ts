@@ -34,14 +34,12 @@ export const usePayStore = defineStore("pay", {
           toast.add({
             title: "To'lov qilindi",
             description: `${res.data.newPay.amount}`,
-            icon: "material-symbols:check-circle-outline-rounded",
           });
         }
       } catch (error: any) {
         toast.add({
           title: "Xatolik",
           description: `${error.response.data.message}`,
-          icon: "material-symbols:check-circle-outline-rounded",
         });
         throw error;
       }
@@ -65,7 +63,6 @@ export const usePayStore = defineStore("pay", {
         toast.add({
           title: "Xatolik",
           description: `${error.response.data.message}`,
-          icon: "material-symbols:check-circle-outline-rounded",
         });
         throw error;
       }

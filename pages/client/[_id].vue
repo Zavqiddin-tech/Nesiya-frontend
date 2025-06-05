@@ -55,8 +55,7 @@ onMounted(() => {
     >
       <div class="flex gap-5 justify-center lg:flex-col">
         <div class="flex justify-center">
-          
-          <Icon name="ic:round-person" class="text-[80px]"/>
+          <i class="fa-solid fa-user text-[70px]"></i>
         </div>
         <div>
           <div
@@ -78,7 +77,7 @@ onMounted(() => {
       <div class="mt-5 flex lg:flex-col items-center justify-center gap-3">
         <div class="flex items-center">
           <div class="flex items-center text-sm font-medium text-blue-400">
-            <Icon name="line-md:phone-call-loop" size="20" />:
+            <i class="fa-solid fa-phone pr-2"></i>
             {{ clientStore.client.phoneOne }}
           </div>
         </div>
@@ -88,14 +87,14 @@ onMounted(() => {
             v-if="clientStore.client.phoneTwo"
             class="flex items-center text-sm font-medium text-blue-400"
           >
-            <Icon name="line-md:phone-call-loop" size="20" />:
+            <i class="fa-solid fa-phone pr-2"></i>
             {{ clientStore.client.phoneTwo }}
           </div>
           <div
             v-else
             class="flex items-center text-sm font-medium text-red-400"
           >
-            <Icon name="line-md:phone-call-loop" size="20" />: kiritilmagan
+            <i class="fa-solid fa-phone pr-2"></i> kiritilmagan
           </div>
         </div>
       </div>

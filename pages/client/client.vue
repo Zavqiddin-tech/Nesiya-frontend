@@ -46,11 +46,10 @@ const search = () => {
     <UInput
       v-model="state.name"
       color="primary"
-      icon="i-lucide-search"
       highlight
       placeholder="Search..."
     />
-    <UButton @click="search" :loading="clientStore.toggleLoading" class="cursor-pointer">qidiruv {{ toggleLoading }}</UButton>
+    <UButton @click="search" :loading="clientStore.toggleLoading" class="cursor-pointer">qidiruv {{ clientStore.toggleLoading }}</UButton>
   </div>
   <div class="pt-6">
     <TableClientTable />

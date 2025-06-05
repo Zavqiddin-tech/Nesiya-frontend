@@ -1,56 +1,67 @@
 <template>
-  <div class="mt-10 px-5 py-8   inline-block rounded-2xl bg-gray-800">
+  <div
+    class="w-full flex justify-center mt-10 px-5 py-8 rounded-2xl bg-gray-800 lg:w-auto lg:inline-block"
+  >
     <div class="progress">
       <div class="pb-3 text-sm font-light">To'lov</div>
       <div class="barOverflow">
         <div class="bar" :style="{ transform: rotation }"></div>
       </div>
-      <span class="text-xl font-medium">{{ displayValue }}%</span>
+      <span v-if="displayValue >= 0" class="text-xl font-medium"
+        >{{ displayValue }} %</span
+      >
+      <span v-else class="text-xl font-medium"
+        >0 %</span
+      >
       <div class="pt-2 text-sm font-light">qarzdorlik to'landi</div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted } from "vue";
 
 const props = defineProps<{
-  progress: number
-  duration?: number // optional, milliseconds
-}>()
+  progress: number;
+  duration?: number; // optional, milliseconds
+}>();
 
-const displayValue = ref(0)
-const rotation = ref('rotate(45deg)') // 0% starts at 45deg
+const displayValue = ref(0);
+const rotation = ref("rotate(45deg)"); // 0% starts at 45deg
 
 const animateProgress = () => {
-  const start = performance.now()
-  const from = 0
-  const to = props.progress
-  const duration = props.duration ?? 3000
+  const start = performance.now();
+  const from = 0;
+  const to = props.progress;
+  const duration = props.duration ?? 3000;
 
   const step = (timestamp: number) => {
-    const elapsed = timestamp - start
-    const progressRatio = Math.min(elapsed / duration, 1)
-    const current = from + (to - from) * progressRatio
+    const elapsed = timestamp - start;
+    const progressRatio = Math.min(elapsed / duration, 1);
+    const current = from + (to - from) * progressRatio;
 
-    displayValue.value = Math.floor(current)
-    rotation.value = `rotate(${45 + current * 1.8}deg)`
+    displayValue.value = Math.floor(current);
+    rotation.value = `rotate(${45 + current * 1.8}deg)`;
 
+    console.log(displayValue.value);
     if (progressRatio < 1) {
-      requestAnimationFrame(step)
+      requestAnimationFrame(step);
     }
-  }
+  };
 
-  requestAnimationFrame(step)
-}
+  requestAnimationFrame(step);
+};
 
 onMounted(() => {
-  animateProgress()
-})
+  animateProgress();
+});
 
-watch(() => props.progress, () => {
-  animateProgress()
-})
+watch(
+  () => props.progress,
+  () => {
+    animateProgress();
+  }
+);
 </script>
 
 <style scoped>

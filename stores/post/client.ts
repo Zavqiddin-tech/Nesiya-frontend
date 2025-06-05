@@ -68,7 +68,6 @@ export const useClientStore = defineStore("client", {
           toast.add({
             title: "Ro'yxatga olindi",
             description: `${res.data.fName} ${res.data.lName}`,
-            icon: "material-symbols:check-circle-outline-rounded",
           });
         }
       } catch (error: any) {

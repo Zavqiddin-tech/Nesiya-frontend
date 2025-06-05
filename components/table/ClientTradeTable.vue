@@ -94,7 +94,6 @@ onMounted(() => {
                 variant="soft"
                 class="text-xs sm:text-base"
                 >{{ item.paid.toLocaleString() }}
-                <Icon name="mdi:contactless-payment" />
               </UButton>
 
               <template #body>

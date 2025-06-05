@@ -91,7 +91,6 @@ export const useTradeStore = defineStore("trade", {
           toast.add({
             title: "Ro'yxatga olindi",
             description: `${res.data.newTrade.text}`,
-            icon: "material-symbols:check-circle-outline-rounded",
           });
         }
       } catch (error: any) {

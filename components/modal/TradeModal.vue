@@ -3,20 +3,20 @@ import { reactive } from "vue";
 import { useModaltStore } from "~/stores/modal";
 import { useTradeStore } from "~/stores/post/trade";
 const modalStore = useModaltStore();
-const tradeStore = useTradeStore()
+const tradeStore = useTradeStore();
 
 const toast = useToast();
 const handleClose = () => {
   modalStore.setModal(false);
   modalStore.setUpModal(false);
   modalStore.setEditId("");
-	state.text = ""
-	state.price = ""
+  state.text = "";
+  state.price = "";
 };
 
 const router = useRouter();
 const _id = router.currentRoute.value.params._id;
-const state = reactive({clientId: _id});
+const state = reactive({ clientId: _id });
 
 const addTrade = async () => {
   if (state.text && state.price && state.clientId) {
@@ -47,7 +47,7 @@ const addTrade = async () => {
       </UFormField>
       <UFormField label="Narxi" required>
         <UInput
-				type="number"
+          type="number"
           v-model="state.price"
           class="w-full mt-2"
           size="xl"
@@ -57,12 +57,12 @@ const addTrade = async () => {
     </template>
 
     <template #footer>
-      <UButton
-        color="error"
-        variant="soft"
-        @click="handleClose"
-      >bekor qilish</UButton>
-      <UButton @click="addTrade">Qo'shish</UButton>
+      <UButton color="error" variant="soft" @click="handleClose"
+        >bekor qilish</UButton
+      >
+      <UButton class="text-black light:bg-lime-400" @click="addTrade"
+        >Qo'shish</UButton
+      >
     </template>
   </UModal>
 </template>

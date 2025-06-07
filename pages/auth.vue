@@ -49,7 +49,7 @@ const login = () => {
         />
 
         <!-- Submit button -->
-        <UButton type="submit" class="w-full inline-block" >
+        <UButton type="submit" class="w-full inline-block text-black" >
           Login
         </UButton>
       </form>

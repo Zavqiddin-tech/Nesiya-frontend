@@ -1,9 +1,9 @@
 <template>
   <div
-    class="w-full flex justify-center mt-10 px-5 py-8 rounded-2xl bg-gray-800 lg:w-auto lg:inline-block"
+    class="w-full flex justify-center mt-10 px-5 py-8 rounded-2xl bg-gray-800  shadow-lg shadow-gray-700 lg:w-auto lg:inline-block light:bg-gray-50 light:shadow-black/20"
   >
     <div class="progress">
-      <div class="pb-3 text-sm font-light">To'lov</div>
+      <div class="pb-3 text-sm font-light light:text-black">To'lov</div>
       <div class="barOverflow">
         <div class="bar" :style="{ transform: rotation }"></div>
       </div>
@@ -13,7 +13,7 @@
       <span v-else class="text-xl font-medium"
         >0 %</span
       >
-      <div class="pt-2 text-sm font-light">qarzdorlik to'landi</div>
+      <div class="pt-2 text-sm font-light light:text-black">qarzdorlik to'landi</div>
     </div>
   </div>
 </template>

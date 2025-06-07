@@ -33,7 +33,7 @@ onMounted(() => {
       <tbody>
         <tr
           v-for="(item, index) of clientStore.clients"
-          class="border-b border-white/50 dark:hover:bg-white/10 light:hover:bg-black/20"
+          class="border-b border-white/50 dark:hover:bg-white/10 light:hover:bg-black/5"
         >
           <td class="min-w-8 py-3 text-xs sm:text-base">{{ index + 1 }}</td>
           <td>
@@ -77,7 +77,7 @@ onMounted(() => {
     </table>
     <div class="mt-5 flex justify-center">
       <UButton v-if="clientStore.isEnd" color="error">TUGADI</UButton>
-      <UButton v-else @click="clientStore.getAllClient()">Yana</UButton>
+      <UButton v-else @click="clientStore.getAllClient()" class="text-black">Yana</UButton>
     </div>
   </div>
   <div v-else>Ma'lumot yoq</div>

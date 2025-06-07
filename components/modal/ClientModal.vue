@@ -84,7 +84,7 @@ const addClient = async () => {
       <UButton color="error" variant="soft" @click="handleClose"
         >bekor qilish</UButton
       >
-      <UButton @click="addClient">Qo'shish</UButton>
+      <UButton class="text-black light:bg-lime-400" @click="addClient">Qo'shish</UButton>
     </template>
   </UModal>
 </template>

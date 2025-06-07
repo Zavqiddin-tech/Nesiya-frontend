@@ -38,9 +38,8 @@ onMounted(() => {
       <div>
         <UButton
           @click="modalStore.setModal(true)"
-          size="md"
-          class="text-md cursor-pointer"
-          >+ savdo qo'shish</UButton
+          class="text-md text-black bg-lime-400 cursor-pointer"
+          >savdo qo'shish</UButton
         >
       </div>
     </div>
@@ -51,7 +50,7 @@ onMounted(() => {
   >
     <!-- about client -->
     <div
-      class="min-w-[300px] h-[220px] lg:h-[450px] p-3 pt-10 bg-gray-800 rounded-xl"
+      class="min-w-[300px] h-[220px] lg:h-[450px] p-3 pt-10 bg-gray-800 rounded-xl light:bg-gray-50"
     >
       <div class="flex gap-5 justify-center lg:flex-col">
         <div class="flex justify-center">
@@ -105,35 +104,38 @@ onMounted(() => {
         class="w-full mt-10 mb-10 flex justify-around items-start flex-wrap lg:mt-0"
       >
         <!-- xarid -->
-        <div class=" p-3 w-6/12 lg:w-[260px]">
-          <div class="px-3 py-4 bg-gray-800 rounded-2xl ">
+        <div class="p-3 w-6/12 lg:w-[260px]">
+          <div
+            class="px-3 py-4 bg-gray-800 rounded-2xl shadow-md shadow-gray-700 light:bg-gray-50 light:shadow-black/10"
+          >
             <div
               class="text-[16px] sm:text-[22px] text-sky-500 whitespace-nowrap"
             >
               {{ clientStore.client.totalDebt.toLocaleString() }}
-              
             </div>
             <div class="text-[10px] font-medium sm:text-[16px]">Jami Xarid</div>
           </div>
         </div>
 
         <!-- to'landi -->
-        <div class=" p-3 w-6/12 lg:w-[260px]">
-          <div class="px-3 py-4 bg-gray-800 rounded-2xl ">
+        <div class="p-3 w-6/12 lg:w-[260px]">
+          <div
+            class="px-3 py-4 bg-gray-800 rounded-2xl shadow-md shadow-gray-700 light:bg-gray-50 light:shadow-black/10"
+          >
             <div
               class="text-[16px] sm:text-[22px] text-violet-400 whitespace-nowrap"
             >
               {{ clientStore.client.totalPurchase.toLocaleString() }}
-              
-              
             </div>
             <div class="text-[10px] font-medium sm:text-[16px]">To'landi</div>
           </div>
         </div>
 
         <!-- qarzdorlik -->
-        <div class=" p-3 w-12/12 lg:w-[260px]">
-          <div class="px-3 py-4 bg-gray-800 rounded-2xl">
+        <div class="p-3 w-12/12 lg:w-[260px]">
+          <div
+            class="px-3 py-4 bg-gray-800 rounded-2xl shadow-md shadow-gray-700 light:bg-gray-50 light:shadow-black/10"
+          >
             <div
               class="text-[16px] sm:text-[22px] text-pink-500 whitespace-nowrap"
             >
@@ -143,7 +145,6 @@ onMounted(() => {
                   clientStore.client.totalPurchase
                 ).toLocaleString()
               }}
-              
             </div>
             <div class="text-[10px] font-medium sm:text-[16px]">Qarzdorlik</div>
           </div>

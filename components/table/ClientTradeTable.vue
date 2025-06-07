@@ -7,8 +7,6 @@ import { usePayStore } from "~/stores/post/pay";
 const tradeStore = useTradeStore();
 const payStore = usePayStore();
 
-
-
 const router = useRouter();
 const _id = router.currentRoute.value.params._id;
 const total = (a, b) => {
@@ -19,7 +17,7 @@ const state = reactive({ clientId: _id, amount: null });
 
 const add = () => {
   payStore.addPay(state);
-  state.amount  = null
+  state.amount = null;
 };
 
 const fDate = new Intl.DateTimeFormat("ru-RU", {
@@ -49,7 +47,7 @@ onMounted(() => {
       <tbody>
         <tr
           v-for="(item, index) of tradeStore.trades"
-          class="border-b border-white/50 dark:hover:bg-white/10 light:hover:bg-black/20"
+          class="border-b border-white/50 dark:hover:bg-white/10 light:hover:bg-black/5"
         >
           <td class="min-w-3 py-3 text-xs sm:text-base">{{ index + 1 }}</td>
           <td class="w-40">
@@ -113,7 +111,7 @@ onMounted(() => {
                         <span class="pr-3 text-xs font-bold text-green-400"
                           >Muvaffaqiyatli</span
                         >
-                        <span class="text-sm text-gray-300">{{
+                        <span class="text-sm text-gray-300 light:text-black">{{
                           fTime.format(new Date(pay.createdAt))
                         }}</span>
                       </div>
@@ -125,16 +123,22 @@ onMounted(() => {
                   </div>
                   <div v-else>to'lov mavjud emas</div>
                   <div
-                    class="h-[50px] w-full flex justify-center items-center gap-3 fixed bottom-0 bg-zinc-900"
+                    class="h-[50px] w-full flex justify-center items-center gap-3 fixed bottom-0"
                   >
                     <UInput
                       v-model="state.amount"
                       type="number"
-                      variant="subtle"
                       size="xl"
+                      color="primary"
+                      highlight
                       placeholder="pul o'tkazish"
                     />
-                    <UButton @click="add" size="xl">To'lash</UButton>
+                    <UButton
+                      @click="add"
+                      size="xl"
+                      class="text-black light:bg-lime-400"
+                      >To'lash</UButton
+                    >
                   </div>
                 </div>
               </template>
@@ -145,7 +149,10 @@ onMounted(() => {
     </table>
     <div class="pt-10 flex justify-center">
       <UButton v-if="tradeStore.isEnd" color="error">TUGADI</UButton>
-      <UButton v-else @click="tradeStore.getAllTradeByClient(_id)"
+      <UButton
+        v-else
+        @click="tradeStore.getAllTradeByClient(_id)"
+        class="text-black"
         >Yana</UButton
       >
     </div>

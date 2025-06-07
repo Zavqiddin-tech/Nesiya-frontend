@@ -18,7 +18,7 @@ definePageMeta({
     <div class="text-xl">Savdo bo'limi</div>
     <div>
       <NuxtLink to="/client/client"
-        ><UButton size="xs" class="text-md cursor-pointer">savdo</UButton>
+        ><UButton class="text-md  text-black light:bg-lime-400 cursor-pointer">savdo</UButton>
       </NuxtLink>
     </div>
   </div>

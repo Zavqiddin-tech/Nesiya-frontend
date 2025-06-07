@@ -36,8 +36,8 @@ const search = () => {
     <div>
       <UButton
         @click="modalStore.setModal(true)"
-        size="xs"
-        class="text-md cursor-pointer"
+        
+        class="text-md text-black light:bg-lime-400 cursor-pointer"
         >mijoz qo'shish</UButton
       >
     </div>
@@ -49,7 +49,7 @@ const search = () => {
       highlight
       placeholder="Search..."
     />
-    <UButton @click="search" :loading="clientStore.toggleLoading" class="cursor-pointer">qidiruv {{ clientStore.toggleLoading }}</UButton>
+    <UButton @click="search" :loading="clientStore.toggleLoading" class="cursor-pointer text-black light:bg-lime-400">qidiruv</UButton>
   </div>
   <div class="pt-6">
     <TableClientTable />
